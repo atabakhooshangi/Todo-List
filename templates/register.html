@@ -1,0 +1,36 @@
+{% extends 'main.html' %}
+{% block content %}
+
+<div class="header-bar">
+    <h1>Register</h1>
+</div>
+
+<div class="card-body">
+    <form method="POST">
+        {% csrf_token %}
+        <label>{{form.username.label}}</label>
+        {{form.username}}
+        {% for error in form.username.errors %}
+                                            <p style="color: red;">{{ error }}</p>
+                                        {% endfor %}
+
+        <label>{{form.password.label}}</label>
+        {{form.password}}
+    {% for error in form.password.errors %}
+                                            <p style="color: red;">{{ error }}</p>
+                                        {% endfor %}
+
+        <label>{{form.confirm_password.label}}</label>
+        {{form.confirm_password}}
+    {% for error in form.confirm_password.errors %}
+                                            <p style="color: red;">{{ error }}</p>
+                                        {% endfor %}
+        <input style="margin-top:10px ;" class="button" type="submit" value="Register">
+    </form>
+    <p>Already have an account? <a href="{% url 'Core:Login' %}">Login</a></p>
+</div>
+
+
+
+
+{% endblock content %}

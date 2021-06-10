@@ -1,0 +1,36 @@
+{% extends 'main.html' %} {% block content %}
+
+
+<div class="header-bar">
+    <div>
+        <h1>Hello {{request.user|title}}</h1>
+       <h3 style="margin:0">{{ task.title }}{% if task.complete %} (Completed){% else %} (Incomplete){% endif %}</h3>
+
+
+    </div>
+
+    {% if request.user.is_authenticated %}
+
+        <span> <a style="color: black" href="{% url 'Core:Task List' %}">&#8592; Back</a>
+    <a href="{% url 'Core:Logout' %}">Logout</a></span>
+
+    {% else %}
+        <a href="{% url 'Core:Login' %}">Login</a>
+    {% endif %}
+</div>
+
+<div id="tasklist" class="task-items-wrapper">
+
+    <div class="task-wrapper" data-position="{{task.pk}}">
+        <div class="task-title">
+            <p>{{ task.description }}</p>
+        </div>
+        <div class="task-controls">
+            <a style="margin-right: 30px" class="delete-link" href="{% url 'Core:Delete Confirm' task.id %}">&#215;</a>
+
+        </div>
+    </div>
+
+</div>
+
+{% endblock content %}
